@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mensagem de Boas-Vindas - CCM</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #224080;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      color: #000;
+      border-radius: 16px;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 20px;
+      max-width: 180px;
+    }
+
+    input {
+      padding: 10px 20px;
+      width: 30%;
+      font-size: 16px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #224080;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background-color: #1a3166;
+    }
+
+    .arrow {
+      font-size: 18px;
+    }
+
+    textarea {
+      margin-top: 20px;
+      width: 80%;
+      height: 280px;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #224080;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img src="CCM.png" alt="Logo CCM" class="logo" />
+    <h2>Gerador de Mensagem de Boas-Vindas</h2>
+
+    <label for="nome">Nome do usuário:</label><br>
+    <input type="text" id="nome" placeholder="Ex: jfernandes" />
+    <button onclick="gerarMensagem()"> <span class="arrow">➡️</span>
+    </button>
+
+    <textarea id="mensagemFinal" readonly placeholder="A mensagem aparecerá aqui..."></textarea>
+  </div>
+
+  <script>
+    function saudacaoPorHorario() {
+      const hora = new Date().getHours();
+      if (hora >= 5 && hora < 12) return "Bom dia";
+      if (hora >= 12 && hora < 18) return "Boa tarde";
+      return "Boa noite";
+    }
+
+    function gerarMensagem() {
+      const nome = document.getElementById("nome").value.trim();
+      if (!nome) {
+        alert("Por favor, insira o nome do usuário.");
+        return;
+      }
+
+      const saudacao = saudacaoPorHorario();
+
+      const textoBase = `${saudacao},
+
+Conforme solicitado, seguem abaixo as informações de acesso:
+
+REDE / PROTHEUS
+Usuário: vlu
+Senha: Ccm@123
+
+Portal de Chamados
+Usuário: vlu@ccmindustria.com.br
+Senha: Ccm@123
+
+E-mail Corporativo
+Endereço: vlu@ccmindustria.com.br
+A senha do e-mail corresponde à senha do computador. Após o primeiro acesso, ao realizar a alteração da senha do computador, a senha do e-mail será atualizada automaticamente.
+
+Fico à disposição para quaisquer dúvidas.`;
+
+      const textoFinal = textoBase.replaceAll("vlu", nome);
+      document.getElementById("mensagemFinal").value = textoFinal;
+    }
+  </script>
+
+</body>
+</html>
